@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Head Content -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edith Kimani - Journalist & Presenter</title>
+
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #ffffff;
+            color: #000;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: transparent;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        /* Scrolled Navbar */
+        nav.scrolled {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+        .nav-left img {
+            height: 80px;
+            width: auto;
+            transition: height 0.3s ease;
+        }
+        .nav-right ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+        .nav-right ul li {
+            margin: 0 15px;
+        }
+        .nav-right ul li a {
+            text-decoration: none;
+            color: #000;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        .nav-right ul li a:hover {
+            color: #ff6347;
+        }
+        /* Section Styles */
+        section {
+            padding: 100px 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Hero Section */
+        .hero {
+            position: relative;
+            background-image: linear-gradient(to bottom, #f8c1a1, #f6d1cb);
+            opacity: 1;
+            transform: translateY(0);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-image {
+            width: 300px;
+            height: auto;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            animation: fadeIn 2s forwards;
+            opacity: 0;
+        }
+
+        /* Fade-In Animation for Image */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
+            color: #000;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #000;
+        }
+
+        /* Animated Buttons */
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: fadeInUp 1s forwards;
+            animation-delay: 1s;
+            opacity: 0;
+        }
+
+        /* Button Styles */
+        .hero-buttons a,
+        .contact-form button {
+            text-decoration: none;
+            color: #fff;
+            background-color: #ff6347;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hero-buttons a:hover,
+        .contact-form button:hover {
+            background-color: #d9534f;
+        }
+
+        /* Keyframes for Text and Button Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-image {
+                width: 200px;
+            }
+            .section-content {
+                flex-direction: column;
+            }
+            .section-content img,
+            .section-content .text-content {
+                max-width: 100%;
+                margin: 0;
+            }
+        }
+
+        /* Shared Styles for Sections */
+        .section-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            gap: 40px;
+        }
+        .section-content img {
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .section-content .text-content {
+            flex: 1;
+        }
+        .section-content .text-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #000;
+        }
+        .section-content .text-content p {
+            font-size: 1.2rem;
+            color: #000;
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        .about-section {
+            background-image: linear-gradient(to bottom, #f6d1cb, #f5f5f5);
+        }
+        .about-section .section-content {
+            flex-direction: row-reverse;
+        }
+        /* Watch Section */
+        .watch-section {
+            background-image: linear-gradient(to bottom, #f5f5f5, #fff9f1);
+        }
+        /* Contact Section */
+        .contact-section {
+            background-image: linear-gradient(to bottom, #fff9f1, #f8c1a1);
+        }
+        .contact-section .section-content {
+            flex-direction: row-reverse;
+        }
+        .contact-section .contact-form {
+            max-width: 500px;
+            margin: 0;
+        }
+        .contact-section .contact-image {
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            color: #000;
+        }
+        /* Social Media Icons in Contact Section */
+        .contact-section .social-media {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .contact-section .social-media a {
+            margin: 0 15px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        .contact-section .social-media a img {
+            width: 40px;
+            height: 40px;
+        }
+        .contact-section .social-media a:hover {
+            transform: scale(1.1);
+        }
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-left {
+            margin-left: 20px;
+        }
+        .footer-left a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .footer-left a:hover {
+            color: #ff6347;
+        }
+        .footer-center {
+            text-align: center;
+            flex: 1;
+        }
+        .footer-center p {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-left">
+            <a href="#home">
+                <img src="logo.png" alt="Edith Kimani Logo">
+            </a>
+        </div>
+        <div class="nav-right">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#watch">Watch</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <img src="edith.png" alt="Edith Kimani" class="hero-image">
+            <h1>Edith Kimani</h1>
+            <p>Renowned Journalist & Presenter</p>
+            <div class="hero-buttons">
+                <a href="#watch">Watch</a>
+                <a href="#contact">Follow</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="section-content">
+            <img src="img2.png" alt="Edith Kimani" class="about-image">
+            <div class="text-content">
+                <h2>About</h2>
+                <p>Edith Kimani is a renowned Kenyan journalist and television presenter with a remarkable career covering significant events and issues in Africa and beyond...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Watch Section -->
+    <section class="watch-section" id="watch">
+        <div class="section-content">
+            <img src="you.png" alt="Recent Work by Edith Kimani" class="watch-image">
+            <div class="text-content">
+                <h2>Watch</h2>
+                <p>Explore recent works and interviews featuring Edith Kimani, highlighting her impactful journalism.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="section-content">
+            <div class="text-content">
+                <h2>Contact</h2>
+                <p>Get in touch with Edith Kimani for collaborations, interviews, and media inquiries.</p>
+                <div class="contact-form">
+                    <form action="/submit" method="post">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email or Phone Number" required>
+                        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Social Media Icons -->
+        <div class="social-media">
+            <a href="https://www.instagram.com/yourprofile" target="_blank" aria-label="Instagram">
+                <img src="ig.svg" alt="Instagram Icon">
+            </a>
+            <a href="https://www.linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn">
+                <img src="linkedin.svg" alt="LinkedIn Icon">
+            </a>
+            <a href="https://x.com/yourprofile" target="_blank" aria-label="X">
+                <img src="x.svg" alt="X Icon">
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-left">
+            <a href="#terms">Terms of Use</a>
+        </div>
+        <div class="footer-center">
+            <p>&copy; 2024 Edith Kimani. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Navbar Effect and Scroll Animations -->
+    <script>
+        // Function to handle navbar background on scroll
+        function handleNavbarBackground() {
+            const nav = document.querySelector('nav');
+            const logo = document.querySelector('.nav-left img');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                    logo.style.height = '60px'; // Reduce logo size on scroll
+                } else {
+                    nav.classList.remove('scrolled');
+                    logo.style.height = '80px'; // Original logo size
+                }
+            });
+        }
+
+        // Function to animate sections on scroll
+        function animateSectionsOnScroll() {
+            const sections = document.querySelectorAll('section');
+
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                if (!section.classList.contains('hero')) { // Exclude hero section
+                    sectionObserver.observe(section);
+                }
+            });
+        }
+
+        // Initialize functions on DOM content loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            handleNavbarBackground();
+            animateSectionsOnScroll();
+        });
+    </script>
+</body>
+</html>
